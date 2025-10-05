@@ -49,7 +49,19 @@ void process_directory(const char* path) {
    */
    if (is_dir(path))
    {
+    chdir(path);
      num_dirs++;
+     DIR *dir = opendir(".");
+     struct dirent *file;
+     while((file = readdir(dir)) != NULL)
+     {
+        if(strcmp(file->d_name, ".") != 0 && strcmp(file->d_name, "..") != 0)
+        {
+            process_path(file->d_name);
+        }
+     }
+     closedir(dir);
+     chdir("..");
    }
 }
 
@@ -58,12 +70,7 @@ void process_file(const char* path) {
    * Update the number of regular files.
    * This is as simple as it seems. :-)
    */
-  struct stat buf;
-  int isRegFile = stat(path, &buf);
-  if (S_ISREG(buf.st_mode) == 1)
-  {
-    num_regular++;
-  }
+  num_regular++;
 }
 
 void process_path(const char* path) {
