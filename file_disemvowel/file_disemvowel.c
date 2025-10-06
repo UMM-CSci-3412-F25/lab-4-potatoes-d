@@ -1,9 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 #include "file_disemvowel.h"
 
 int is_vowel(char c) {
-    c = tolower((unsigned char)c);
+    c = tolower(c);
     return (c == 'a' || c ==  'e' || c == 'i' || c == 'o' || c == 'u');
 }
 
