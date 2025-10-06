@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
   while (fgets(buffer, sizeof(buffer), fptr_in)) {
     char *dis = disemvowel(buffer);
     if (dis) {
-       printf("%s\n", dis);
+       fprintf(fptr_out, "%s\n", dis);
        free((void*) dis);
     }
   }
